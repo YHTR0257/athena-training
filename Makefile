@@ -23,3 +23,18 @@ setup-claude-api-key:
 	mv ~/.claude/settings.json.tmp ~/.claude/settings.json
 	@echo "\033[1;32m✅ Claude API key has been set successfully!\033[0m"
 	@echo "\033[1;34m========================================\033[0m"
+
+up:
+	@echo "\033[1;34m========================================\033[0m"
+	@echo "\033[1;36m🏗️  Building the project...\033[0m"
+	@echo "\033[1;34m========================================\033[0m"
+	@docker build -t athena-training:latest -f ./build/docker/Dockerfile .
+	@echo "\033[1;32m✅ Build complete!\033[0m"
+	@echo "\033[1;34m========================================\033[0m"
+
+run:
+	@echo "\033[1;34m========================================\033[0m"
+	@echo "\033[1;36m🚀 Running the container...\033[0m"
+	@echo "\033[1;34m========================================\033[0m"
+	@docker run --rm -p 8000:8000 athena-training:latest
+	@echo "\033[1;34m========================================\033[0m"
