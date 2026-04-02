@@ -24,17 +24,22 @@ setup-claude-api-key:
 	@echo "\033[1;32m✅ Claude API key has been set successfully!\033[0m"
 	@echo "\033[1;34m========================================\033[0m"
 
+COMPOSE = docker compose -f build/docker/docker-compose.yml --env-file build/.env
+
 up:
 	@echo "\033[1;34m========================================\033[0m"
 	@echo "\033[1;36m🏗️  Building the project...\033[0m"
 	@echo "\033[1;34m========================================\033[0m"
-	@docker build -t athena-training:latest -f ./build/docker/Dockerfile .
+	@$(COMPOSE) build
 	@echo "\033[1;32m✅ Build complete!\033[0m"
 	@echo "\033[1;34m========================================\033[0m"
 
 run:
 	@echo "\033[1;34m========================================\033[0m"
-	@echo "\033[1;36m🚀 Running the container...\033[0m"
+	@echo "\033[1;36m🚀 Running the containers...\033[0m"
 	@echo "\033[1;34m========================================\033[0m"
-	@docker run --rm -p 8000:8000 athena-training:latest
+	@$(COMPOSE) up
 	@echo "\033[1;34m========================================\033[0m"
+
+down:
+	@$(COMPOSE) down
